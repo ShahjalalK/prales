@@ -37,15 +37,18 @@
 
 // module.exports = app
 
-
-
 const express = require('express')
 const app = express()
+
 
 app.get('/', (req, res) => {
     res.status(200).send({
         message : "I am Home"
     })
+})
+
+app.get('/users', (req, res) => {
+    res.status(200).send('I am Product')
 })
 
 app.use((req, res) => {
