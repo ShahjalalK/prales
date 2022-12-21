@@ -39,7 +39,26 @@
 
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 
+
+const userScema = mongoose.Schema({
+
+})
+const User = mongoose.model('users', userScema)
+
+
+
+
+app.get('/users', async (req, res) => {
+    try{
+        const user = await User.find()
+        res.status(200).send(user)
+    }
+    catch(error){
+        res.status(500).send(error)
+    }
+})
 
 app.get('/', (req, res) => {
     res.status(200).send({
@@ -47,13 +66,14 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/users', (req, res) => {
-    res.status(200).send('I am Product')
-})
-
 app.use((req, res) => {
     res.status(404).send({
         message : "404 Page not found"
+    })
+})
+app.use((err, req, res) => {
+    res.status(404).send({
+        message : "Server is error"
     })
 })
 
