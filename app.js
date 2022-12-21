@@ -39,26 +39,15 @@
 
 const express = require('express')
 const app = express()
-const mongoose = require('mongoose')
+const userRouter = require('./routes/user.rout')
 
 
-const userScema = mongoose.Schema({
-
-})
-const User = mongoose.model('users', userScema)
-
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(userRouter)
 
 
 
-app.get('/users', async (req, res) => {
-    try{
-        const user = await User.find()
-        res.status(200).send(user)
-    }
-    catch(error){
-        res.status(500).send(error)
-    }
-})
 
 app.get('/', (req, res) => {
     res.status(200).send({
